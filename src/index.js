@@ -2,6 +2,10 @@ import _ from 'lodash';
 import printMe from './print.js';
 import numRef from './ref.json';
 
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Looks like we are in development mode!');
+}
+
 export function numToWord(num) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.num === num ? ref.word : accum;
