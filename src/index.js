@@ -1,7 +1,18 @@
 import _ from 'lodash';
 import printMe from './print.js';
 
- function component() {
+async function getAsyncComponent() {
+
+  const element = document.createElement('div');
+  const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
+
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+  return element;
+
+}
+
+function component() {
   
   const element = document.createElement('div');
   const btn = document.createElement('button');
@@ -17,21 +28,21 @@ import printMe from './print.js';
  
 }
 
-// function getComponent() {
+function getComponent() {
   
-//   const element = document.createElement('div');
-//   // Lodash, now imported by this script
-//   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-//     return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
-//       const element = document.createElement('div');
-//       element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-//       return element;
-//   }).catch(error => 'An error occurred while loading the component');
+  const element = document.createElement('div');
+  // Lodash, now imported by this script
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
+      const element = document.createElement('div');
+      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+      return element;
+  }).catch(error => 'An error occurred while loading the component');
 
-// }
+}
 
-// getComponent().then(component => {
-//   document.body.appendChild(component);
-// })
+getAsyncComponent().then(component => {
+  document.body.appendChild(component);
+})
 
-document.body.appendChild(component());
+// document.body.appendChild(component());
