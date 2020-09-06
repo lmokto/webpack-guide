@@ -41,8 +41,8 @@ function getComponent() {
 
 }
 
-getAsyncComponent().then(component => {
-  document.body.appendChild(component);
-})
+// getAsyncComponent().then(component => {
+//   document.body.appendChild(component);
+// })
 
-// document.body.appendChild(component());
+document.body.appendChild(component());

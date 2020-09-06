@@ -12,6 +12,19 @@ module.exports = {
   devServer: {
     contentBase: './dist',
   },
+  optimization: {
+    moduleIds: 'hashed',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },    
+  },  
   // optimization: {
   //   splitChunks: {
   //     chunks: 'all',
@@ -20,13 +33,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: 'Caching',
     }),
   ],
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    // filename: '[name].bundle.js',
+    // chunkFilename: '[name].bundle.js',
+    // publicPath: '/',
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist')
   },
 };
